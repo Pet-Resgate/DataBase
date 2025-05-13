@@ -18,7 +18,7 @@ Este repositório contém os modelos conceitual, lógico e físico do banco de d
 - Arquivo editável: [`modelo_logico.drawio`](./diagrams/modelo_logico.drawio)
 - Visualização rápida:
 
-![Modelo Lógico](./diagrams/modelo_logico.png)
+![Modelo Lógico](./diagrams/modelo logico.png)
 
 ---
 
