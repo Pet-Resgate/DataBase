@@ -7,23 +7,23 @@ Este repositório contém os modelos conceitual, lógico e físico do banco de d
 ## 📊 Modelos do Banco de Dados
 
 ### 📌 Modelo Conceitual (DER)
-- Arquivo editável: [`modelo_conceitual.drawio`](./diagrams/modelo_conceitual.drawio)
+- Arquivo editável: [`Modelo Conceitual.drawio`](diagrams/Modelo%20Conceitual.drawio)
 - Visualização rápida:
 
-![Modelo Conceitual](./diagrams/modelo_conceitual.png)
+![Modelo Conceitual](diagrams/Modelo%20Conceitual.png)
 
 ---
 
 ### 📌 Modelo Lógico
-- Arquivo editável: [`modelo_logico.drawio`](./diagrams/modelo_logico.drawio)
+- Arquivo editável: [`Modelo Lógico.drawio`](diagrams/Modelo%20L%C3%B3gico.drawio)
 - Visualização rápida:
 
-![Modelo Lógico](./diagrams/modelo logico.png)
+![Modelo Lógico](diagrams/Modelo%20L%C3%B3gico.png)
 
 ---
 
 ### 🧩 Modelo Físico (PostgreSQL)
-- Script SQL: [`modelo_fisico.sql`](./sql/modelo_fisico.sql)
+- Script SQL: [`modelo_fisico.sql`](./sql/Modelo%20físico.sql)
 - Contém as instruções `CREATE TABLE` com chaves primárias, estrangeiras e restrições (`CHECK`, `UNIQUE`, etc).
 
 ---
