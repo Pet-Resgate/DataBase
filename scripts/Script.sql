@@ -40,6 +40,92 @@ CREATE TABLE Adocao (
 
 --DROP TABLE IF EXISTS Adocao, Pet, Usuario CASCADE;
 
+CREATE TABLE IF NOT EXISTS public.pet
+(
+    id_pet integer NOT NULL DEFAULT nextval('pet_id_pet_seq'::regclass),
+    id_usuario integer NOT NULL,
+    nome character varying(20) COLLATE pg_catalog."default",
+    idade integer,
+    animal text COLLATE pg_catalog."default",
+    raca character varying(50) COLLATE pg_catalog."default",
+    porte character varying(20) COLLATE pg_catalog."default",
+    descricao text COLLATE pg_catalog."default",
+    status character varying(30) COLLATE pg_catalog."default",
+    data_resgate date,
+    brinca integer,
+    carinhoso integer,
+    sociavel integer,
+    sexo character varying(10) COLLATE pg_catalog."default",
+    CONSTRAINT pet_pkey PRIMARY KEY (id_pet),
+    CONSTRAINT fk_pet_usuario FOREIGN KEY (id_usuario)
+        REFERENCES public.usuario (id_usuario) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE,
+    CONSTRAINT pet_idade_check CHECK (idade >= 0),
+    CONSTRAINT pet_brinca_check CHECK (brinca >= 1 AND brinca <= 3),
+    CONSTRAINT pet_carinhoso_check CHECK (carinhoso >= 1 AND carinhoso <= 3),
+    CONSTRAINT pet_sociavel_check CHECK (sociavel >= 1 AND sociavel <= 3),
+    CONSTRAINT pet_sexo_check CHECK (sexo::text = ANY (ARRAY['macho'::character varying, 'fêmea'::character varying]::text[]))
+)
+
+
+TABLESPACE pg_default;
+
+
+ALTER TABLE IF EXISTS public.pet
+    OWNER to postgres;
+
+
+CREATE TABLE IF NOT EXISTS public.adocao
+(
+    id_adocao integer NOT NULL DEFAULT nextval('adocao_id_adocao_seq'::regclass),
+    id_usuario integer NOT NULL,
+    id_pet integer NOT NULL,
+    data_adocao date NOT NULL,
+    formulario text COLLATE pg_catalog."default",
+    CONSTRAINT adocao_pkey PRIMARY KEY (id_adocao),
+    CONSTRAINT adocao_id_pet_key UNIQUE (id_pet),
+    CONSTRAINT fk_adocao_pet FOREIGN KEY (id_pet)
+        REFERENCES public.pet (id_pet) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE,
+    CONSTRAINT fk_adocao_usuario FOREIGN KEY (id_usuario)
+        REFERENCES public.usuario (id_usuario) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+)
+
+
+TABLESPACE pg_default;
+
+
+ALTER TABLE IF EXISTS public.adocao
+    OWNER to postgres;
+
+
+CREATE TABLE IF NOT EXISTS public.usuario
+(
+    id_usuario integer NOT NULL DEFAULT nextval('usuario_id_usuario_seq'::regclass),
+    tipo_usuario character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    nome character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    idade integer,
+    email character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    cpf character varying(11) COLLATE pg_catalog."default",
+    senha character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    telefone character varying(20) COLLATE pg_catalog."default",
+    cnpj character varying(20) COLLATE pg_catalog."default",
+    CONSTRAINT usuario_pkey PRIMARY KEY (id_usuario),
+    CONSTRAINT usuario_email_key UNIQUE (email),
+    CONSTRAINT usuario_idade_check CHECK (idade >= 18)
+)
+
+
+TABLESPACE pg_default;
+
+
+ALTER TABLE IF EXISTS public.usuario
+    OWNER to postgres;
+
 
 --INSERT
 -- Inserir usuários (protetores e adotantes)
