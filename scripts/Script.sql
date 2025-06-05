@@ -23,6 +23,7 @@ CREATE TABLE Pet (
     descricao TEXT,
     status VARCHAR(30),
     data_resgate DATE,
+    sexo VARCHAR(10) CHECK (sexo IN ('macho', 'fêmea')),
     CONSTRAINT fk_pet_usuario FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario) ON DELETE CASCADE
 );
 
